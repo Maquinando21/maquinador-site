@@ -4,32 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Maquinando a Riqueza — Máquinas e Ferramentas para Trabalhar e Ganhar Mais</title>
-  <meta name="description" content="Seleção de máquinas e ferramentas para quem quer trabalhar, produzir e gerar renda extra. Links diretos para os anúncios no Mercado Livre, Shopee e AliExpress." />
+  <meta name="description" content="Seleção de máquinas e ferramentas para quem quer trabalhar, produzir e gerar renda extra. Links diretos para os anúncios no Mercado Livre e Shopee." />
   <meta name="theme-color" content="#0a0a0a" />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Maquinando a Riqueza — Máquinas e Ferramentas" />
   <meta property="og:description" content="As melhores máquinas e ferramentas para você trabalhar, produzir e ganhar mais." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/img/og-cover.jpg" />
+  <meta property="og:image" content="assets/img/banner.jpg" />
   <meta property="og:locale" content="pt_BR" />
 
-  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
   <link rel="stylesheet" href="assets/css/styles.css" />
-
-  <!-- Google Analytics (cole seu ID em assets/js/analytics.js e descomente) -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script src="assets/js/analytics.js"></script> -->
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-row">
     <a class="logo" href="./" aria-label="Maquinando a Riqueza - Início">
-      <img src="assets/img/logo.svg" alt="Maquinando a Riqueza" />
+      <img src="assets/img/logo-header.png" alt="Maquinando a Riqueza" />
     </a>
 
-    <form class="search" role="search" onsubmit="return false;">
+    <form class="search" role="search" onsubmit="event.preventDefault();return false;">
       <label for="q" class="visually-hidden">Buscar produtos</label>
       <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 1 1-5.3 14l-4.4 4.4-1.4-1.4 4.4-4.4A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
       <input id="q" type="search" placeholder="Buscar máquinas, ferramentas e muito mais..." autocomplete="off" />
@@ -46,34 +42,41 @@
 
   <nav id="catMenu" class="cat-strip" aria-label="Categorias">
     <div class="container cat-strip-row" id="catStrip">
-      <!-- preenchido por JS a partir de products.json -->
+      <!-- preenchido por JS -->
     </div>
   </nav>
 </header>
 
 <main>
 
-  <!-- HERO BANNER -->
+  <!-- HERO BANNER - SÓ IMAGEM -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <h1>As Melhores <span class="y">Máquinas e Ferramentas</span><br>
-          para você Trabalhar, Produzir<br>
-          e <span class="y">Ganhar Mais!</span></h1>
-        <a href="#ofertas" class="btn-cta">Confira as Ofertas →</a>
-      </div>
-      <div class="hero-image" aria-hidden="true">
-        <!-- Troque assets/img/banner.jpg pela sua arte.
-             Tamanho ideal: desktop 1600x600 (ou 2x = 3200x1200).
-             Mobile:  800x600 (ou 2x = 1600x1200). -->
-        <img src="assets/img/banner.svg" alt="" onerror="this.style.display='none'" />
-      </div>
-    </div>
+    <a href="#ofertas-dia" class="hero-img-link" aria-label="Confira as ofertas">
+      <img src="assets/img/banner.jpg" alt="Maquinando a Riqueza - As Melhores Máquinas e Ferramentas" />
+    </a>
   </section>
 
-  <!-- DOIS GRANDES BLOCOS -->
+  <!-- SEÇÃO 1: OFERTAS DO DIA - FERRAMENTAS -->
+  <section class="container section-block" id="ofertas-dia">
+    <header class="section-head">
+      <h2>Ofertas do Dia — Ferramentas</h2>
+      <a href="#grupo=ferramentas" class="see-all">Ver todas →</a>
+    </header>
+    <div id="gridFerramentas" class="grid grid-row" aria-live="polite"></div>
+  </section>
+
+  <!-- SEÇÃO 2: OS MAIS VENDIDOS -->
+  <section class="container section-block">
+    <header class="section-head">
+      <h2>Os Mais Vendidos — Seção Maquinando a Riqueza</h2>
+      <a href="#grupo=maquinas" class="see-all">Ver todas →</a>
+    </header>
+    <div id="gridMaisVendidos" class="grid grid-row" aria-live="polite"></div>
+  </section>
+
+  <!-- DOIS GRANDES BLOCOS (filtram por grupo) -->
   <section class="big-cats container">
-    <a class="big-cat" href="#categoria=ferramentas">
+    <a class="big-cat" href="#grupo=ferramentas" data-grupo="ferramentas">
       <svg class="big-cat-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.7 18.6L14.9 11.8a5 5 0 0 0-6.4-6.4l3.4 3.4-1.4 3.6-3.6 1.4-3.4-3.4a5 5 0 0 0 6.4 6.4l6.8 6.8a1 1 0 0 0 1.4 0l3.6-3.6a1 1 0 0 0 0-1.4z"/></svg>
       <div>
         <h3>Ferramentas</h3>
@@ -81,7 +84,7 @@
       </div>
       <span class="big-cat-arrow">→</span>
     </a>
-    <a class="big-cat" href="#categoria=maquinas">
+    <a class="big-cat" href="#grupo=maquinas" data-grupo="maquinas">
       <svg class="big-cat-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.4 7.4 0 0 0 .1-1 7.4 7.4 0 0 0-.1-1l2.1-1.6-2-3.4-2.5 1a7.3 7.3 0 0 0-1.7-1l-.4-2.6h-4l-.4 2.6a7.3 7.3 0 0 0-1.7 1l-2.5-1-2 3.4L6.5 11a7.4 7.4 0 0 0 0 2l-2.1 1.6 2 3.4 2.5-1c.5.4 1.1.7 1.7 1l.4 2.6h4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.4L19.4 13zM12 15.5A3.5 3.5 0 1 1 15.5 12 3.5 3.5 0 0 1 12 15.5z"/></svg>
       <div>
         <h3>Máquinas</h3>
@@ -91,16 +94,24 @@
     </a>
   </section>
 
-  <!-- CONTEÚDO COM FILTROS + GRID -->
+  <!-- CONTEÚDO COMPLETO COM FILTROS -->
   <section class="container shop">
 
-    <!-- Botão filtros no mobile -->
     <button id="openFilters" class="btn-filter-mobile" type="button">Filtrar ▾</button>
 
     <aside id="filters" class="filters" aria-label="Filtros">
       <div class="filters-head">
         <h2>Filtros</h2>
         <button id="closeFilters" class="btn-x" aria-label="Fechar filtros">×</button>
+      </div>
+
+      <div class="filter-block">
+        <h3>Grupo</h3>
+        <ul class="grupo-list">
+          <li><label><input type="radio" name="grupof" value="todos" checked> Todos</label></li>
+          <li><label><input type="radio" name="grupof" value="ferramentas"> 🔧 Ferramentas</label></li>
+          <li><label><input type="radio" name="grupof" value="maquinas"> ⚙️ Máquinas</label></li>
+        </ul>
       </div>
 
       <div class="filter-block">
@@ -112,7 +123,7 @@
         <h3>Faixa de preço</h3>
         <div class="price-range">
           <label>Mín R$ <input type="number" id="priceMin" min="0" step="10" placeholder="0" /></label>
-          <label>Máx R$ <input type="number" id="priceMax" min="0" step="10" placeholder="10000" /></label>
+          <label>Máx R$ <input type="number" id="priceMax" min="0" step="10" placeholder="999999" /></label>
         </div>
       </div>
 
@@ -136,13 +147,11 @@
 
     <div class="products-col">
       <header class="section-head" id="ofertas">
-        <h2>Ofertas em Destaque</h2>
+        <h2 id="shopTitle">Todos os Produtos</h2>
         <span class="muted" id="resultCount"></span>
       </header>
 
-      <div id="grid" class="grid" aria-live="polite">
-        <!-- cards renderizados por JS -->
-      </div>
+      <div id="grid" class="grid" aria-live="polite"></div>
 
       <p class="updated" id="lastUpdate"></p>
     </div>
@@ -152,13 +161,13 @@
   <section class="container trust-strip-wrap">
     <div class="trust-strip">
       <h2>Como escolhemos</h2>
-      <p>Priorizamos produtos com boa reputação de venda no Mercado Livre, Shopee e AliExpress. Os preços são consultados na data mostrada em cada card e podem mudar — sempre confirme o preço final no site do vendedor antes de comprar.</p>
+      <p>Priorizamos produtos com boa reputação de venda no Mercado Livre, Shopee e lojas confiáveis. Os preços são consultados na data mostrada em cada card e podem mudar — sempre confirme o preço final no site do vendedor antes de comprar.</p>
     </div>
   </section>
 
   <section class="container about" id="sobre">
     <h2>Sobre o Maquinando a Riqueza</h2>
-    <p>O Maquinando a Riqueza é um canal focado em mostrar máquinas e ferramentas que ajudam pessoas comuns a construir uma fonte de renda extra. Este site é uma vitrine complementar: todos os botões levam ao anúncio original no Mercado Livre, Shopee ou AliExpress. A compra, pagamento e entrega acontecem diretamente no site do vendedor.</p>
+    <p>O Maquinando a Riqueza é um canal focado em mostrar máquinas e ferramentas que ajudam pessoas comuns a construir uma fonte de renda extra. Este site é uma vitrine complementar: todos os botões levam ao anúncio original no Mercado Livre, Shopee ou loja parceira. A compra, pagamento e entrega acontecem diretamente no site do vendedor.</p>
   </section>
 
 </main>
@@ -166,7 +175,7 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <img src="assets/img/logo-dark.svg" alt="Maquinando a Riqueza" />
+      <img src="assets/img/logo-header.png" alt="Maquinando a Riqueza" />
       <p class="tagline"><strong>Trabalhe Melhor.</strong><br><span class="y">Conquiste Mais!</span></p>
     </div>
 
@@ -192,7 +201,7 @@
       <a href="privacidade.html">Política de Privacidade</a>
     </nav>
     <p class="disclosure">
-      Este site contém links de afiliado. Podemos receber comissão por compras feitas pelos links, sem custo extra pra você. As compras são feitas diretamente no Mercado Livre, Shopee ou AliExpress.
+      Este site contém links de afiliado. Podemos receber comissão por compras feitas pelos links, sem custo extra pra você. As compras são feitas diretamente no Mercado Livre, Shopee ou loja parceira.
     </p>
     <p class="copy">© <span id="yr"></span> Maquinando a Riqueza. Todos os direitos reservados.</p>
   </div>
@@ -216,12 +225,7 @@
         <span class="price"></span>
         <span class="price-date"></span>
       </div>
-      <div class="card-actions">
-        <a class="btn-buy" target="_blank" rel="sponsored nofollow noopener">Ver Oferta →</a>
-        <button class="btn-share" type="button" aria-label="Compartilhar no WhatsApp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11 11 0 0 0 3.6 17.2L2 22l4.9-1.6a11 11 0 0 0 13.6-16.9zM12 20.1a8 8 0 0 1-4.1-1.1l-.3-.2-2.9 1 1-2.8-.2-.3a8 8 0 1 1 6.5 3.4zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8s-.4-.1-.6.2-.7.8-.8 1-.3.1-.6 0a6.6 6.6 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.8.4a3.1 3.1 0 0 0-1 2.3c0 1.3 1 2.6 1.1 2.8s2 3 4.9 4.2a16.5 16.5 0 0 0 1.6.6 3.8 3.8 0 0 0 1.7.1c.5 0 1.5-.6 1.7-1.2s.3-1.1.2-1.2z"/></svg>
-        </button>
-      </div>
+      <a class="btn-buy" target="_blank" rel="sponsored nofollow noopener">Ver Oferta →</a>
     </div>
   </article>
 </template>
