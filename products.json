@@ -1,5 +1,5 @@
 {
-  "ultima_atualizacao": "10/11/2026",
+  "ultima_atualizacao": "12/11/2026",
   "categorias": [
     { "slug": "ferramentas-eletricas",     "nome": "Ferramentas Elétricas",      "grupo": "ferramentas" },
     { "slug": "alimentacao-bebidas",       "nome": "Alimentação e Bebidas",       "grupo": "maquinas" },
@@ -67,6 +67,15 @@
     { "id": "ml-041", "nome": "Lavadora de Alta Pressão WAP Ousada Plus 2200 1500W 1750 PSI", "categoria": "limpeza-servicos", "preco": 465.40, "preco_data": "10/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_694471-MLA96077668763_102025-E.webp", "link_afiliado": "https://meli.la/2ZmzJYo", "fonte": "mercadolivre" },
     { "id": "ml-042", "nome": "Re.sole Máquina de Lavar Tênis Profissional 220V", "categoria": "limpeza-servicos", "preco": 15500.00, "preco_data": "10/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_730519-MLB118739707584_102026-E.webp", "link_afiliado": "https://meli.la/1evoU81", "fonte": "mercadolivre" },
     { "id": "ml-043", "nome": "Aspirador de Pó e Água WAP GTW Inox 12 1400W 127V", "categoria": "limpeza-servicos", "preco": 299.00, "preco_data": "10/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_933991-MLA99990557667_112025-E.webp", "link_afiliado": "https://meli.la/1F3g4W5", "fonte": "mercadolivre" },
-    { "id": "ml-044", "nome": "Extratora Limpadora de Estofados Kelns para Sofá, Colchão e Tapete", "categoria": "limpeza-servicos", "preco": 359.99, "preco_data": "10/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_986083-MLB118616792832_102026-E.webp", "link_afiliado": "https://meli.la/1eahLDg", "fonte": "mercadolivre" }
+    { "id": "ml-044", "nome": "Extratora Limpadora de Estofados Kelns para Sofá, Colchão e Tapete", "categoria": "limpeza-servicos", "preco": 359.99, "preco_data": "10/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_986083-MLB118616792832_102026-E.webp", "link_afiliado": "https://meli.la/1eahLDg", "fonte": "mercadolivre" },
+
+    { "id": "shp-001", "nome": "Mini Processador Elétrico 4 Lâminas 3L Moedor de Carne Tritura Verduras e Temperos", "categoria": "alimentacao-bebidas", "preco": 148.65, "preco_data": "12/11/2026", "imagem": "https://down-br.img.susercontent.com/file/sg-11134201-7rfh4-m9ah4acu9mzt0f", "link_afiliado": "https://shopee.com.br/produto-i.419601105.22793955180", "fonte": "shopee" },
+    { "id": "shp-002", "nome": "Descascador Elétrico Automático Portátil 127/220V — Alho, Uvas, Frutas e Legumes", "categoria": "alimentacao-bebidas", "preco": 52.99, "preco_data": "12/11/2026", "imagem": "https://down-br.img.susercontent.com/file/sg-11134201-821f9-mh84rmlerk0c54", "link_afiliado": "https://shopee.com.br/produto-i.1229047031.23499185230", "fonte": "shopee" },
+    { "id": "ml-045", "nome": "Máquina de Solda, Corte a Laser e Limpeza 4 em 1 — 1.500W 220V", "categoria": "oficina-automotivo", "preco": 44900.00, "preco_data": "12/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_971106-MLB114601218326_082026-E.webp", "link_afiliado": "https://meli.la/1KcXNDt", "fonte": "mercadolivre" },
+    { "id": "ml-046", "nome": "Máquina de Impressão Plana UV de Mesa Eufymake E1 (capinhas de celular, canecas, etc.)", "categoria": "impressao-personalizacao", "preco": 13474.97, "preco_data": "12/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_680094-CBT118971274885_102026-E.webp", "link_afiliado": "https://meli.la/2FDcPMY", "fonte": "mercadolivre" },
+    { "id": "ml-047", "nome": "Carregador Portátil para Carro Elétrico (Wallbox) MDFF 32A 7kW Cabo 5m", "categoria": "oficina-automotivo", "preco": 939.93, "preco_data": "12/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_633561-MLA110969492755_042026-E.webp", "link_afiliado": "https://meli.la/29g3WHf", "fonte": "mercadolivre" },
+    { "id": "ml-048", "nome": "Máquina de Fabricar Pregos (indústria)", "categoria": "construcao-reforma", "preco": 115000.00, "preco_data": "12/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_785563-MLB115400093134_082026-E.webp", "link_afiliado": "https://meli.la/2nnvELB", "fonte": "mercadolivre" },
+    { "id": "ml-049", "nome": "Usina de Reciclagem de Pneus (industrial completa)", "categoria": "reciclagem", "preco": 3450800.00, "preco_data": "12/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_609792-MLB46278636940_062021-E.webp", "link_afiliado": "https://meli.la/2SPP7Hz", "fonte": "mercadolivre" },
+    { "id": "ml-050", "nome": "Prensa Hidráulica Máquina Extratora de Óleo Automática (coco, chia, gergelim)", "categoria": "alimentacao-bebidas", "preco": 2646.00, "preco_data": "12/11/2026", "imagem": "https://http2.mlstatic.com/D_Q_NP_2X_626342-MLA96425726974_102025-E.webp", "link_afiliado": "https://meli.la/1hyDDGZ", "fonte": "mercadolivre" }
   ]
 }
