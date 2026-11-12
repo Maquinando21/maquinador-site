@@ -166,6 +166,8 @@
     if (!grid) return;
     const list = items.slice(0, limit);
     grid.innerHTML = '';
+    // Duplica os itens pra criar efeito de loop infinito
+    list.forEach(p => grid.appendChild(buildCard(p)));
     list.forEach(p => grid.appendChild(buildCard(p)));
     // Oculta "Ver todas" se não houver mais produtos além do limite
     const section = grid.closest('.section-block');
@@ -175,7 +177,7 @@
       const total = state.products.filter(p => p.grupo === grupo).length;
       seeAll.style.display = total > list.length ? '' : 'none';
     }
-    // Oculta setas do carrossel se poucos itens pra scroll
+    // Setas (só se houver overflow)
     const wrap = grid.closest('.carousel-wrap');
     if (wrap) {
       requestAnimationFrame(() => {
@@ -183,6 +185,34 @@
         wrap.querySelectorAll('.carousel-btn').forEach(b => b.style.display = overflow ? '' : 'none');
       });
     }
+    // Auto-scroll infinito
+    startAutoScroll(grid);
+  }
+
+  const autoScrollers = new WeakMap();
+  function startAutoScroll(grid){
+    if (autoScrollers.has(grid)) clearInterval(autoScrollers.get(grid).id);
+    const state = { paused: false, id: 0, wheelTimer: 0 };
+    grid.addEventListener('mouseenter', () => { state.paused = true; });
+    grid.addEventListener('mouseleave', () => { state.paused = false; });
+    grid.addEventListener('touchstart', () => { state.paused = true; }, {passive:true});
+    grid.addEventListener('touchend', () => { setTimeout(() => { state.paused = false; }, 3500); }, {passive:true});
+    grid.addEventListener('wheel', () => {
+      state.paused = true;
+      clearTimeout(state.wheelTimer);
+      state.wheelTimer = setTimeout(() => { state.paused = false; }, 3000);
+    }, {passive:true});
+
+    // ~25 px/s = 0.5px a cada 20ms
+    state.id = setInterval(() => {
+      if (state.paused) return;
+      const half = grid.scrollWidth / 2;
+      if (grid.scrollLeft >= half) {
+        grid.scrollLeft = grid.scrollLeft - half;
+      }
+      grid.scrollLeft = grid.scrollLeft + 0.5;
+    }, 20);
+    autoScrollers.set(grid, state);
   }
 
   function renderFerramentasSection(){
@@ -271,9 +301,19 @@
     // Mobile filters
     $('#openFilters').addEventListener('click', () => $('#filters').classList.add('open'));
     $('#closeFilters').addEventListener('click', () => $('#filters').classList.remove('open'));
-    $('#menuToggle').addEventListener('click', () => {
-      document.getElementById('catMenu').scrollIntoView({ behavior: 'smooth' });
-    });
+
+    // Cat-strip se oculta ao rolar pra baixo da página
+    const catStrip = document.getElementById('catMenu');
+    let lastScrollY = 0;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y > 120 && y > lastScrollY) {
+        catStrip?.classList.add('hidden');
+      } else {
+        catStrip?.classList.remove('hidden');
+      }
+      lastScrollY = y;
+    }, {passive:true});
 
     // Big-cats + Ver todas: filtra grupo e scroll pro grid principal
     const goToGrupo = grupo => {

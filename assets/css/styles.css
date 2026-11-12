@@ -31,8 +31,8 @@ button{font:inherit;cursor:pointer}
 .muted{color:var(--muted);font-size:14px}
 
 /* ============== HEADER ============== */
-.site-header{background:var(--black);color:#fff;position:sticky;top:0;z-index:50;border-bottom:3px solid var(--gold)}
-.header-row{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:12px 16px}
+.site-header{background:var(--black);color:#fff;position:sticky;top:0;z-index:50;border-bottom:3px solid var(--gold);transition:transform .3s ease}
+.header-row{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:12px 16px}
 .logo img{height:52px;width:auto;display:block}
 
 .search{position:relative;display:flex;align-items:center;background:#fff;border-radius:999px;padding:4px 6px 4px 46px;box-shadow:0 1px 0 rgba(255,255,255,.1)}
@@ -42,12 +42,9 @@ button{font:inherit;cursor:pointer}
 .btn-search svg{width:18px;height:18px;fill:#000}
 .btn-search:hover{background:var(--gold-2)}
 
-.btn-menu{display:none;background:transparent;color:#fff;border:0;align-items:center;gap:8px;padding:10px 12px;border-radius:10px}
-.btn-menu .burger{width:18px;height:2px;background:#fff;position:relative;display:inline-block}
-.btn-menu .burger::before,.btn-menu .burger::after{content:"";position:absolute;left:0;width:18px;height:2px;background:#fff}
-.btn-menu .burger::before{top:-6px}.btn-menu .burger::after{top:6px}
-
-.cat-strip{background:var(--black);border-top:1px solid #1e1e1e}
+/* Strip de categorias — oculta ao rolar pra baixo */
+.cat-strip{background:var(--black);border-top:1px solid #1e1e1e;overflow:hidden;max-height:60px;transition:max-height .3s ease, opacity .25s ease, padding .3s ease;opacity:1}
+.cat-strip.hidden{max-height:0;opacity:0;border-top-color:transparent}
 .cat-strip-row{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:thin}
 .cat-chip{flex:0 0 auto;background:#1a1a1a;color:#fff;border:1px solid #2a2a2a;border-radius:999px;padding:8px 14px;font-size:14px;white-space:nowrap;cursor:pointer}
 .cat-chip:hover,.cat-chip.active{background:var(--gold);color:#000;border-color:var(--gold)}
@@ -67,11 +64,11 @@ button{font:inherit;cursor:pointer}
 
 /* ============== CARROSSEL ============== */
 .carousel-wrap{position:relative}
-.carousel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+.carousel{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
 .carousel::-webkit-scrollbar{height:6px}
 .carousel::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
 .carousel::-webkit-scrollbar-track{background:transparent}
-.carousel > .card{flex:0 0 240px;scroll-snap-align:start;min-width:240px}
+.carousel > .card{flex:0 0 240px;min-width:240px}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:999px;background:#fff;color:#000;border:2px solid var(--gold);font-size:22px;font-weight:800;cursor:pointer;z-index:5;box-shadow:0 4px 10px rgba(0,0,0,.15);display:grid;place-items:center;line-height:1;padding:0 0 4px}
 .carousel-btn:hover{background:var(--gold)}
 .carousel-prev{left:-14px}
@@ -166,11 +163,11 @@ button{font:inherit;cursor:pointer}
 
 /* ============== RESPONSIVO ============== */
 @media (max-width: 960px){
-  .header-row{grid-template-columns:auto auto;gap:10px;padding:10px 12px}
-  .logo{grid-column:1}
-  .logo img{height:44px}
-  .btn-menu{display:inline-flex;grid-column:2;justify-self:end}
+  .header-row{grid-template-columns:1fr;gap:8px;padding:8px 12px}
+  .logo{justify-self:center}
+  .logo img{height:50px}
   .search{grid-column:1 / -1;padding-left:40px}
+  .hero-img-link img{max-height:none;width:100%}
   .big-cats{grid-template-columns:1fr}
   .shop{grid-template-columns:1fr}
   .btn-filter-mobile{display:inline-block}
