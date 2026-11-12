@@ -56,22 +56,30 @@
     </a>
   </section>
 
-  <!-- SEÇÃO 1: OFERTAS DO DIA - FERRAMENTAS -->
+  <!-- SEÇÃO 1: OFERTAS DO DIA - FERRAMENTAS (carrossel horizontal) -->
   <section class="container section-block" id="ofertas-dia">
     <header class="section-head">
       <h2>Ofertas do Dia — Ferramentas</h2>
-      <a href="#grupo=ferramentas" class="see-all">Ver todas →</a>
+      <button type="button" class="see-all" data-grupo="ferramentas">Ver todas →</button>
     </header>
-    <div id="gridFerramentas" class="grid grid-row" aria-live="polite"></div>
+    <div class="carousel-wrap">
+      <button class="carousel-btn carousel-prev" type="button" data-target="gridFerramentas" aria-label="Anterior">‹</button>
+      <div id="gridFerramentas" class="carousel" aria-live="polite"></div>
+      <button class="carousel-btn carousel-next" type="button" data-target="gridFerramentas" aria-label="Próximo">›</button>
+    </div>
   </section>
 
-  <!-- SEÇÃO 2: OS MAIS VENDIDOS -->
+  <!-- SEÇÃO 2: OS MAIS VENDIDOS (carrossel horizontal) -->
   <section class="container section-block">
     <header class="section-head">
       <h2>Os Mais Vendidos — Seção Maquinando a Riqueza</h2>
-      <a href="#grupo=maquinas" class="see-all">Ver todas →</a>
+      <button type="button" class="see-all" data-grupo="maquinas">Ver todas →</button>
     </header>
-    <div id="gridMaisVendidos" class="grid grid-row" aria-live="polite"></div>
+    <div class="carousel-wrap">
+      <button class="carousel-btn carousel-prev" type="button" data-target="gridMaisVendidos" aria-label="Anterior">‹</button>
+      <div id="gridMaisVendidos" class="carousel" aria-live="polite"></div>
+      <button class="carousel-btn carousel-next" type="button" data-target="gridMaisVendidos" aria-label="Próximo">›</button>
+    </div>
   </section>
 
   <!-- DOIS GRANDES BLOCOS (filtram por grupo) -->
@@ -223,7 +231,6 @@
       <h3 class="card-title"><a target="_blank" rel="sponsored nofollow noopener"></a></h3>
       <div class="price-row">
         <span class="price"></span>
-        <span class="price-date"></span>
       </div>
       <a class="btn-buy" target="_blank" rel="sponsored nofollow noopener">Ver Oferta →</a>
     </div>

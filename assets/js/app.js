@@ -123,7 +123,6 @@
     const title = node.querySelector('.card-title a');
     const buy = node.querySelector('.btn-buy');
     const price = node.querySelector('.price');
-    const priceDate = node.querySelector('.price-date');
     const badge = node.querySelector('.src-badge');
     const fav = node.querySelector('.fav');
 
@@ -135,7 +134,6 @@
     buy.href = p.link_afiliado || '#';
     buy.textContent = 'Ver Oferta →';
     price.textContent = fmtBR(p.preco);
-    priceDate.textContent = p.preco_data ? `Preço consultado em ${p.preco_data}` : '';
     badge.textContent = srcLabel(p.fonte);
     badge.className = 'src-badge ' + srcClass(p.fonte);
 
@@ -163,21 +161,38 @@
     grid.appendChild(frag);
   }
 
-  function renderFerramentasSection(){
-    const grid = $('#gridFerramentas');
+  function renderCarousel(elId, items, limit){
+    const grid = document.getElementById(elId);
     if (!grid) return;
-    const items = state.products.filter(p => p.grupo === 'ferramentas').slice(0, 6);
+    const list = items.slice(0, limit);
     grid.innerHTML = '';
-    items.forEach(p => grid.appendChild(buildCard(p)));
+    list.forEach(p => grid.appendChild(buildCard(p)));
+    // Oculta "Ver todas" se não houver mais produtos além do limite
+    const section = grid.closest('.section-block');
+    const seeAll = section?.querySelector('.see-all');
+    if (seeAll) {
+      const grupo = seeAll.dataset.grupo;
+      const total = state.products.filter(p => p.grupo === grupo).length;
+      seeAll.style.display = total > list.length ? '' : 'none';
+    }
+    // Oculta setas do carrossel se poucos itens pra scroll
+    const wrap = grid.closest('.carousel-wrap');
+    if (wrap) {
+      requestAnimationFrame(() => {
+        const overflow = grid.scrollWidth > grid.clientWidth + 10;
+        wrap.querySelectorAll('.carousel-btn').forEach(b => b.style.display = overflow ? '' : 'none');
+      });
+    }
+  }
+
+  function renderFerramentasSection(){
+    const items = state.products.filter(p => p.grupo === 'ferramentas');
+    renderCarousel('gridFerramentas', items, 6);
   }
 
   function renderMaisVendidosSection(){
-    const grid = $('#gridMaisVendidos');
-    if (!grid) return;
-    // "Mais vendidos" = primeiras máquinas do grupo maquinas
-    const items = state.products.filter(p => p.grupo === 'maquinas').slice(0, 6);
-    grid.innerHTML = '';
-    items.forEach(p => grid.appendChild(buildCard(p)));
+    const items = state.products.filter(p => p.grupo === 'maquinas');
+    renderCarousel('gridMaisVendidos', items, 6);
   }
 
   function toggleFav(id, el){
@@ -260,19 +275,42 @@
       document.getElementById('catMenu').scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Big-cats - clique no bloco Ferramentas/Máquinas
+    // Big-cats + Ver todas: filtra grupo e scroll pro grid principal
+    const goToGrupo = grupo => {
+      state.activeGrupo = grupo;
+      state.activeCat = 'todas';
+      state.search = '';
+      qInput.value = '';
+      syncCatUI();
+      renderGrid();
+      updateShopTitle();
+      location.hash = 'grupo=' + grupo;
+      document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
     $$('.big-cat').forEach(el => {
       el.addEventListener('click', e => {
         const grupo = el.dataset.grupo;
         if (!grupo) return;
         e.preventDefault();
-        state.activeGrupo = grupo;
-        state.activeCat = 'todas';
-        syncCatUI();
-        renderGrid();
-        updateShopTitle();
-        location.hash = 'grupo=' + grupo;
-        document.getElementById('ofertas')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        goToGrupo(grupo);
+      });
+    });
+    $$('.see-all').forEach(el => {
+      el.addEventListener('click', e => {
+        const grupo = el.dataset.grupo;
+        if (!grupo) return;
+        e.preventDefault();
+        goToGrupo(grupo);
+      });
+    });
+
+    // Setas carrossel
+    $$('.carousel-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.dataset.target);
+        if (!target) return;
+        const step = Math.min(target.clientWidth * 0.8, 500);
+        target.scrollBy({ left: btn.classList.contains('carousel-next') ? step : -step, behavior: 'smooth' });
       });
     });
 
