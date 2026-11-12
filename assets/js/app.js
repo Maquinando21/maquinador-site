@@ -302,15 +302,37 @@
     $('#openFilters').addEventListener('click', () => $('#filters').classList.add('open'));
     $('#closeFilters').addEventListener('click', () => $('#filters').classList.remove('open'));
 
-    // Cat-strip se oculta ao rolar pra baixo da página
+    // Cat-strip se oculta ao rolar pra baixo da página.
+    // Usa threshold pra não ficar oscilando ("jitter") em scrolls pequenos.
     const catStrip = document.getElementById('catMenu');
-    let lastScrollY = 0;
+    let lastScrollY = window.scrollY;
+    let lastDirY = lastScrollY;     // última posição em que mudamos de estado
+    let isHidden = false;
+    const DELTA = 12;               // só reage com >12px de movimento
+    const SHOW_THRESHOLD = 60;      // sempre mostra perto do topo
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
-      if (y > 120 && y > lastScrollY) {
+      // Perto do topo: sempre mostra
+      if (y < SHOW_THRESHOLD) {
+        if (isHidden) { catStrip?.classList.remove('hidden'); isHidden = false; }
+        lastScrollY = y; lastDirY = y;
+        return;
+      }
+      const delta = y - lastDirY;
+      if (Math.abs(delta) < DELTA) {
+        lastScrollY = y;
+        return;
+      }
+      if (delta > 0 && !isHidden) {
+        // scroll pra baixo (pra ler mais conteúdo) → oculta
         catStrip?.classList.add('hidden');
-      } else {
+        isHidden = true;
+        lastDirY = y;
+      } else if (delta < 0 && isHidden) {
+        // scroll pra cima → mostra
         catStrip?.classList.remove('hidden');
+        isHidden = false;
+        lastDirY = y;
       }
       lastScrollY = y;
     }, {passive:true});
