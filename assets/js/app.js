@@ -303,38 +303,43 @@
     $('#closeFilters').addEventListener('click', () => $('#filters').classList.remove('open'));
 
     // Cat-strip se oculta ao rolar pra baixo da página.
-    // Usa threshold pra não ficar oscilando ("jitter") em scrolls pequenos.
+    // No mobile: viewport muda quando barra de endereço aparece/some + inertial
+    // scroll. Usa threshold grande + confirmação por rAF pra evitar tremor.
     const catStrip = document.getElementById('catMenu');
-    let lastScrollY = window.scrollY;
-    let lastDirY = lastScrollY;     // última posição em que mudamos de estado
+    let lastDirY = window.scrollY;
     let isHidden = false;
-    const DELTA = 12;               // só reage com >12px de movimento
-    const SHOW_THRESHOLD = 60;      // sempre mostra perto do topo
-    window.addEventListener('scroll', () => {
+    let scheduled = false;
+    const isMobile = window.matchMedia('(max-width: 960px)').matches;
+    const DELTA = isMobile ? 40 : 15;
+    const SHOW_THRESHOLD = 80;
+
+    const processScroll = () => {
+      scheduled = false;
       const y = window.scrollY;
-      // Perto do topo: sempre mostra
+      if (y < 0) return; // rubber-band bounce no iOS
       if (y < SHOW_THRESHOLD) {
         if (isHidden) { catStrip?.classList.remove('hidden'); isHidden = false; }
-        lastScrollY = y; lastDirY = y;
+        lastDirY = y;
         return;
       }
       const delta = y - lastDirY;
-      if (Math.abs(delta) < DELTA) {
-        lastScrollY = y;
-        return;
-      }
+      if (Math.abs(delta) < DELTA) return; // ignora oscilações pequenas
       if (delta > 0 && !isHidden) {
-        // scroll pra baixo (pra ler mais conteúdo) → oculta
         catStrip?.classList.add('hidden');
         isHidden = true;
         lastDirY = y;
       } else if (delta < 0 && isHidden) {
-        // scroll pra cima → mostra
         catStrip?.classList.remove('hidden');
         isHidden = false;
         lastDirY = y;
       }
-      lastScrollY = y;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (scheduled) return;
+      scheduled = true;
+      // Processa só 1x por frame (throttle via rAF funciona mesmo em bg)
+      setTimeout(processScroll, 80);
     }, {passive:true});
 
     // Big-cats + Ver todas: filtra grupo e scroll pro grid principal
