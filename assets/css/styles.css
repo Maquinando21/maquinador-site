@@ -89,7 +89,7 @@ button{font:inherit;cursor:pointer}
 
 /* ============== SHOP ============== */
 .shop{display:grid;grid-template-columns:260px 1fr;gap:24px;margin:30px auto 40px}
-.filters{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;position:sticky;top:140px;align-self:start;max-height:calc(100vh - 160px);overflow:auto}
+.filters{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;position:sticky;top:140px;align-self:start;max-height:calc(100vh - 160px);overflow-y:auto;overflow-x:hidden}
 .filters-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .filters h2{margin:0;font-size:18px}
 .btn-x{display:none;background:transparent;border:0;font-size:28px;line-height:1}
@@ -98,9 +98,9 @@ button{font:inherit;cursor:pointer}
 .filter-block h3{margin:0 0 10px;font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:#444}
 .cat-filter-list,.src-list,.grupo-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .cat-filter-list label,.src-list label,.grupo-list label{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
-.price-range{display:flex;gap:8px}
-.price-range label{display:flex;flex-direction:column;flex:1;font-size:12px;color:#444}
-.price-range input{border:1px solid var(--line);border-radius:8px;padding:8px;font-size:14px;margin-top:4px}
+.price-range{display:flex;flex-direction:column;gap:10px}
+.price-range label{display:flex;flex-direction:column;font-size:12px;color:#444}
+.price-range input{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px;margin-top:4px;min-width:0}
 .btn-clear{margin-top:14px;width:100%;background:#111;color:#fff;border:0;padding:10px;border-radius:10px;font-weight:600}
 .btn-clear:hover{background:var(--gold);color:#000}
 .btn-filter-mobile{display:none;background:var(--gold);color:#000;border:0;padding:10px 16px;border-radius:999px;font-weight:700;margin-bottom:12px}
