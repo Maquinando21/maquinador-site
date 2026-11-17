@@ -31,7 +31,8 @@ button{font:inherit;cursor:pointer}
 .muted{color:var(--muted);font-size:14px}
 
 /* ============== HEADER ============== */
-.site-header{background:var(--black);color:#fff;position:sticky;top:0;z-index:50;border-bottom:3px solid var(--gold);transition:transform .3s ease}
+.site-header{background:var(--black);color:#fff;position:sticky;top:0;z-index:50;border-bottom:3px solid var(--gold);transition:transform .3s ease;will-change:transform}
+.site-header.hidden-header{transform:translateY(-100%)}
 .header-row{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:12px 16px}
 .logo img{height:52px;width:auto;display:block}
 
@@ -42,9 +43,8 @@ button{font:inherit;cursor:pointer}
 .btn-search svg{width:18px;height:18px;fill:#000}
 .btn-search:hover{background:var(--gold-2)}
 
-/* Strip de categorias — oculta ao rolar pra baixo */
-.cat-strip{background:var(--black);border-top:1px solid #1e1e1e;overflow:hidden;max-height:60px;transition:max-height .3s ease, opacity .25s ease, padding .3s ease;opacity:1}
-.cat-strip.hidden{max-height:0;opacity:0;border-top-color:transparent}
+/* Strip de categorias (sempre visível dentro do header) */
+.cat-strip{background:var(--black);border-top:1px solid #1e1e1e}
 .cat-strip-row{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:thin}
 .cat-chip{flex:0 0 auto;background:#1a1a1a;color:#fff;border:1px solid #2a2a2a;border-radius:999px;padding:8px 14px;font-size:14px;white-space:nowrap;cursor:pointer}
 .cat-chip:hover,.cat-chip.active{background:var(--gold);color:#000;border-color:var(--gold)}

@@ -302,34 +302,35 @@
     $('#openFilters').addEventListener('click', () => $('#filters').classList.add('open'));
     $('#closeFilters').addEventListener('click', () => $('#filters').classList.remove('open'));
 
-    // Cat-strip se oculta ao rolar pra baixo da página.
-    // No mobile: viewport muda quando barra de endereço aparece/some + inertial
-    // scroll. Usa threshold grande + confirmação por rAF pra evitar tremor.
-    const catStrip = document.getElementById('catMenu');
+    // Header inteiro se oculta ao rolar pra baixo (mesma técnica do ML mobile).
+    // Esconder só a strip causava loop: altura do header mudava → scrollY
+    // mudava → detectava como "scroll up" → mostrava de novo → loop infinito.
+    // Escondendo o header inteiro, a altura total não muda (ele usa transform).
+    const header = document.querySelector('.site-header');
     let lastDirY = window.scrollY;
     let isHidden = false;
     let scheduled = false;
     const isMobile = window.matchMedia('(max-width: 960px)').matches;
-    const DELTA = isMobile ? 40 : 15;
-    const SHOW_THRESHOLD = 80;
+    const DELTA = isMobile ? 30 : 15;
+    const SHOW_THRESHOLD = 100;
 
     const processScroll = () => {
       scheduled = false;
       const y = window.scrollY;
-      if (y < 0) return; // rubber-band bounce no iOS
+      if (y < 0) return;
       if (y < SHOW_THRESHOLD) {
-        if (isHidden) { catStrip?.classList.remove('hidden'); isHidden = false; }
+        if (isHidden) { header?.classList.remove('hidden-header'); isHidden = false; }
         lastDirY = y;
         return;
       }
       const delta = y - lastDirY;
-      if (Math.abs(delta) < DELTA) return; // ignora oscilações pequenas
+      if (Math.abs(delta) < DELTA) return;
       if (delta > 0 && !isHidden) {
-        catStrip?.classList.add('hidden');
+        header?.classList.add('hidden-header');
         isHidden = true;
         lastDirY = y;
       } else if (delta < 0 && isHidden) {
-        catStrip?.classList.remove('hidden');
+        header?.classList.remove('hidden-header');
         isHidden = false;
         lastDirY = y;
       }
@@ -338,7 +339,6 @@
     window.addEventListener('scroll', () => {
       if (scheduled) return;
       scheduled = true;
-      // Processa só 1x por frame (throttle via rAF funciona mesmo em bg)
       setTimeout(processScroll, 80);
     }, {passive:true});
 
