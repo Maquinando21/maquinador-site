@@ -45,7 +45,7 @@
         link_afiliado: p.link_afiliado || '',
         fonte: (p.fonte || 'mercadolivre').toLowerCase(),
       }));
-      $('#lastUpdate').textContent = data.ultima_atualizacao ? `Atualizado em ${data.ultima_atualizacao}` : '';
+      // (data de atualização removida — não exibimos mais no site)
     }catch(err){
       console.error('[loadData]', err);
       $('#grid').innerHTML = '<p class="muted">Produtos ainda não foram cadastrados. Edite <code>products.json</code>.</p>';
